@@ -1,0 +1,132 @@
+type Bill {
+  billProducts: [BillProduct!]
+  cost: Int!
+  order: Order!
+  state: BillStates!
+}
+
+type BillProduct {
+  bill: Bill!
+  product: Product!
+}
+
+enum BillStates {
+  Finished
+  Paid
+  Pending
+  WaitingPayment
+}
+
+input CreateBillInput {
+  orderId: ID!
+}
+
+input CreateBillProductInput {
+  billId: ID!
+  productId: ID!
+}
+
+input CreateOrderInput {
+  restaurantId: ID!
+}
+
+input CreateOrderProductInput {
+  orderId: ID!
+  productId: ID!
+}
+
+input CreateProductInput {
+  cost: Int!
+  restaurantId: ID!
+  type: ProductType!
+}
+
+input GetOrderInput {
+  id: ID!
+}
+
+input GetRestaurantInput {
+  id: ID!
+}
+
+input ListOrderInput {
+  restaurantId: ID!
+}
+
+input ListProductInput {
+  restaurantId: ID!
+}
+
+input ListRestaurantTablesInput {
+  restaurantId: ID!
+}
+
+type Mutation {
+  createBill(input: CreateBillInput!): Bill
+  createBillProduct(input: CreateBillProductInput!): BillProduct
+  createOrder(input: CreateOrderInput!): Order
+  createOrderProduct(input: CreateOrderProductInput!): OrderProduct
+  createProduct(input: CreateProductInput!): Product!
+}
+
+type Order {
+  bills: [Bill!]
+  orderProducts: [OrderProduct!]
+  restaurant: Restaurant!
+  state: OrderStates!
+  totalCost: Int!
+}
+
+type OrderProduct {
+  order: Order!
+  product: Product!
+}
+
+enum OrderStates {
+  Finished
+  PendingProductEnrollments
+  PendingProductRegistration
+  WaitingPayment
+}
+
+type Product {
+  billProducts: [BillProduct!]
+  cost: Int!
+  orderProducts: [OrderProduct!]
+  restaurant: Restaurant!
+  type: ProductType!
+}
+
+enum ProductType {
+  Coctel
+  Dessert
+  Drink
+  Entry
+  MainDish
+  Salad
+}
+
+type Query {
+  getOrder(input: GetOrderInput!): Order
+  getRestaurant(input: GetRestaurantInput!): Restaurant
+  listOrder(input: ListOrderInput!): [Order!]
+  listProduct(input: ListProductInput!): [Product!]
+  listRestaurantTables(input: ListRestaurantTablesInput!): [RestaurantTable!]
+}
+
+type Restaurant {
+  name: String
+  orders: [Order!]
+  products: [Product!]
+  tables: [RestaurantTable!]
+}
+
+type RestaurantTable {
+  restaurant: Restaurant!
+  state: RestaurantTableState!
+}
+
+enum RestaurantTableState {
+  Free
+  Used
+}

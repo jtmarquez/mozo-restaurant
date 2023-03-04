@@ -1,0 +1,14 @@
+schema: 
+    ${API_URL: "http://localhost:3000/graphql-restaurant-api"}
+generates:
+  src/apollo/generated/types.ts:
+    plugins:
+      - add:
+          content: /* eslint-disable @typescript-eslint/no-explicit-any */
+      - "typescript"
+  src/apollo/generated/schema.graphql:
+    plugins:    
+      - schema-ast
+hooks:
+  afterAllFileWrite:
+    - prettier --write

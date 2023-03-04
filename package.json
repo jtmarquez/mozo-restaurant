@@ -8,6 +8,7 @@
     "start": "webpack-cli serve --mode=development --env development --open --hot",
     "build": "webpack --mode=production --env production --progress",
     "lint": "eslint './src/**/*.{ts,tsx}'",
+    "codegen": "graphql-codegen",
     "lint:fix": "eslint './src/**/*.{ts,tsx}' --fix"
   },
   "repository": {
@@ -22,6 +23,9 @@
   },
   "homepage": "https://github.com/jtmarquez/mozo-restaurant#readme",
   "devDependencies": {
+    "@graphql-codegen/cli": "^3.2.1",
+    "@graphql-codegen/client-preset": "^2.1.0",
+    "@graphql-typed-document-node/core": "^3.1.2",
     "@types/node": "^18.14.5",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
@@ -29,6 +33,7 @@
     "@types/webpack-dev-server": "^4.7.2",
     "@typescript-eslint/eslint-plugin": "^5.54.0",
     "@typescript-eslint/parser": "^5.54.0",
+    "dotenv-webpack": "^8.0.1",
     "eslint": "^8.35.0",
     "eslint-config-prettier": "^8.6.0",
     "eslint-plugin-import": "^2.27.5",
@@ -47,6 +52,9 @@
     "webpack-dev-server": "^4.11.1"
   },
   "dependencies": {
+    "@apollo/client": "^3.7.9",
+    "@types/dotenv-webpack": "^7.0.3",
+    "graphql": "^16.6.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.8.2"
